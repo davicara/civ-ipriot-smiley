@@ -111,7 +111,9 @@ python3 main.py
 6. Examine `happy.py`, and identify the constructor (initializer) for the `Happy` class:
    1. What is the purpose of a constructor (in general) and this one (in particular)?
 
-   > class Happy(Smiley, Blinkable):  
+   > ```python
+   > class Happy(Smiley, Blinkable):
+   > ```  
    > A constructor is a method that runs when an onject is created from a class, it allows for the setting up of attributes and running any setup code.  
    > For this class in particular initialises the Happy object, ensures that the base classes Smiley and Blinkable are initialised and that the eyes and mouth are drawn. 
  
@@ -120,9 +122,11 @@ python3 main.py
    2. What statement(s) does it execute (consider the `super` call), and what is the result?
 
    > The code it executes is:  
-   > `super().__init__()`   
-   > `self.draw_mouth()`   
-   > `self.draw_eyes()`  
+   > ```python
+    > super().__init__()
+    > self.draw_mouth()  
+    > self.draw_eyes()
+   > ```
    > the super function calls the constructor of the first parent class so python intialises smiley first, as it appears first in the inheritance 
 
 ### 2.3. Code style
@@ -164,10 +168,10 @@ python3 main.py
 
 | Class Name | Super or Sub? | Direct parent(s)  |
 |------------|---------------|-------------------|
-| Smiley     | Super         |                   |
+| Smiley     | Super         | None              |
 | Happy      | Sub           | Smiley, Blinkable |
 | Sad        | Sub           | Smiley            |
-| Blinkable  | Super         |                   |
+| Blinkable  | Super         | None              |
 
 2. Explain the concept of abstraction, giving an example from the project (note "implementing an ABC" is **not** in itself an example of abstraction). (Max 150 words)
 
@@ -301,19 +305,19 @@ Include a screenshot of the sad smiley or the modified `main.py`:
   1. **Defined Colors and Their Location:**
 
      1. Which colors are defined and in which class(s)?
-        > Your answer here
+        > Colors,  `Blue`, `Yellow`, `Green`, `White` and `Red` are defined in the `Smiley` class, along with `Blank` if you were to count it as a colour
      2. What type of variables hold these colors? Are the values expected to change during the program's execution? Explain your answer.
-        > Your answer here
+        > The type of variable is a `Class Variable`, no the variables are not expected to change during execution as there is no method exists to change it.
      3. Add the color blue to the appropriate class using the appropriate format and values.
 
   2. **Usage of Color Variables:**
 
      1. In which classes are the color variables used?
-        > Your answer here
+        > The variables are used in the `Sad` and `Happy` classes.
 
   3. **Simple Method to Change Colors:**
   4. What is the easiest way you can think to change the smileys to green? Easiest, not necessarily the best!
-     > Your answer here
+     > Create a variable called `self.green_pixels` that can be accessed used instead of `self.pixels` variable.
 
 
 
@@ -326,8 +330,10 @@ Include a screenshot of the sad smiley or the modified `main.py`:
   2. **Refactor subclasses to use the `complexion` method:** Modify any subclass that directly accesses the color variable to instead utilize the new `complexion` method. This ensures that color handling is centralized and can be easily modified in the future.
 
   3. **Determine the applicable Object-Oriented principle:** Consider whether Abstraction, Polymorphism, Inheritance, or Encapsulation best applies to the modifications made in this step.
+> Abstraction
 
   4. **Verify the implementation:** Ensure that the modifications function as expected. The smileys should still display in yellow, confirming that the new method correctly replaces the direct color references.
+> ![Working Complexion](screenshots/working_complexion.png)
 
   This step is crucial for setting up a more flexible system for color management in the smiley display logic, allowing for easy adjustments and extensions in the future.
 
@@ -342,8 +348,7 @@ Include a screenshot of the sad smiley or the modified `main.py`:
   3. **Rationale for `my_complexion`:** Using a distinct instance variable like `my_complexion` avoids potential conflicts with the method parameter names and clarifies that it is an attribute specific to the object.
 
   4. **Bulk rename:** We want to update our grid to use the value of complexion, but we have so many `Y`'s in the grid. Use your IDE's refactoring tool to rename all instances of the **symbol** `Y` to `X`. Where `X` is the value of the `complexion` variable. Include a screenshot evidencing you have found the correct refactor tool and the changes made.
-
-  ![Bulk Rename](screenshots/bulk_rename.png)
+  ![Bulk Rename](screenshots/refactoring_variables.png)
 
   5. **Update the `complexion` method:** Adjust this method to return `self.my_complexion`, ensuring that whatever color is assigned during instantiation is what the smiley displays.
 
@@ -360,9 +365,9 @@ Include a screenshot of the sad smiley or the modified `main.py`:
      ```
 
   2. **Test color functionality for the Sad smiley:** Execute the program to verify that the Sad smiley now appears blue.
-
+![Sad Colour Change](screenshots/sad_color_change.png)
   3. **Ensure the Happy smiley remains yellow:** Confirm that changes to the Sad smiley do not affect the default color of the Happy smiley, which should still display in yellow.
 
   4. **Design and Implement An Angry Smiley:** Create an Angry smiley class that inherits from the `Smiley` class. Set the color of the Angry smiley to red by passing `self.RED` as the `complexion` argument in the superclass call.
-
+![Angry](screenshots/angry.png)
   ***

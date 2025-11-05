@@ -6,6 +6,7 @@ import time
 
 from sad import Sad
 from happy import Happy
+from angry import Angry
 
 def main():
     smiley = Sad()
