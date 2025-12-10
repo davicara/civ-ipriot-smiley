@@ -127,7 +127,7 @@ python3 main.py
     > self.draw_mouth()  
     > self.draw_eyes()
    > ```
-   > the super function calls the constructor of the first parent class so python intialises smiley first, as it appears first in the inheritance 
+   > the super function calls the constructor of the first parent class so python intialises smiley first, as it appears first in the inheritance. It then draws the mouth and the eyes of the smiley.
 
 ### 2.3. Code style
 
@@ -171,12 +171,12 @@ python3 main.py
 | Smiley     | Super         | None              |
 | Happy      | Sub           | Smiley, Blinkable |
 | Sad        | Sub           | Smiley            |
-| Blinkable  | Super         | None              |
+| Blinkable  | Super         | ABC               |
 
 2. Explain the concept of abstraction, giving an example from the project (note "implementing an ABC" is **not** in itself an example of abstraction). (Max 150 words)
 
 > Abstraction is where the complex details of code is hidden to only show the essentials features, allowing for a user to not have to worry about the internal workings.   
-> An example could be `sense_hat` having 2 set pixel methods, one being `_set_pixels` and the other being `set_pixel`, the first method is only used in internal usages whilst the other method is used by the user.
+> An example could be how `smiley.py` has a method called `show()` which pretty much just calls a more complex method called `show_pixels()`
 >
 
 3. What is the name of the process of deriving from base classes? What is its purpose in this project? (Max 150 words)
@@ -233,7 +233,7 @@ Unlike the `Happy` smiley, the current implementation of the `Sad` smiley does n
 
 3. Referring to the implementation of blink in the Happy and Sad Smiley classes, give a brief explanation of what polymorphism is.
 
-> Polymorphism is where multiple classes have the same name for methods, which allows them to be used interchangebly through the same interface. It can be seen being used in `Sad` and `Happy` as they both have the methods, `draw_eyes` and `draw_mouth`.
+> Polymorphism is where multiple classes have the same name for methods, which allows them to be used interchangebly through the same interface. It can be seen being used in `Sad` and `Happy` as they both have the method, `blink()`.
 >
 
 4. How is inheritance used in the blink method, and why is it important for polymorphism?
@@ -284,15 +284,15 @@ Include a screenshot of the sad smiley or the modified `main.py`:
 
   3. **OO Principle Identification:** Regarding your answer to question (2), which Object-Oriented (OO) principle does this represent? Choose from the following and justify your answer in 1-2 sentences: Abstraction, Polymorphism, Inheritance, Encapsulation.
 
-  > It follows the principles of polymorphism as it allows different classes to call the same method name with its own unique functionality, which is the essence of polymorphism 
+  > `Blinkable` defines a generic interface `blink()` method without providing a concrete implementation. This hides the specific details of how blinking works and allows subclasses to provide their own implementation, which is a textbook example of abstraction.
 
   4. **Implementation Flexibility:** Explain why you could grant the Sad Smiley a blinking feature similar to the Happy Smiley's implementation, even without directly using `Blinkable`.
 
-  > You'd be able to implement the blinking method as long as you use the same name as is used for the `Blinkable` class without disrupting the polymorphism.
+  > You can give the `Sad Smiley` a blinking feature without using `Blinkable` because any class can define a `blink()` method independently. As long as the method name is consistent, code that calls `blink()` on different smiley objects can still operate on them interchangeably, enabling polymorphism without requiring the abstract base class.
 
   5. **Concept and Language Specificity:** In relation to your response to question (4), what is this capability known as, and why is it feasible in Python and many other dynamically typed languages but not in most statically typed programming languages like C#? **Clue** This concept is hinted at in the title of this section.
 
-  > In languages like C# where types are checked at compile time instead of runtime a method must match the declared type or interface of an object. As such it's required for a interface such as `Blinkable` to be implemented for polymorphism to work.
+  > This capability is known as duck typing, it's the idea that an object can be used if it has the necessary methods or attributes, regardless of its formal type. It works in `Python` and other dynamically typed languages because type checking occurs at runtime, so any object with a `blink()` method can be used interchangeably. In statically typed languages like `C#`, the compiler enforces that a class must explicitly implement an interface or inherit a type, so polymorphism requires formal type relationships.
 
   ***
 
@@ -317,7 +317,7 @@ Include a screenshot of the sad smiley or the modified `main.py`:
 
   3. **Simple Method to Change Colors:**
   4. What is the easiest way you can think to change the smileys to green? Easiest, not necessarily the best!
-     > Create a variable called `self.green_pixels` that can be accessed used instead of `self.pixels` variable.
+     > Switch the complexion=YELLOW to complexion=GREEN
 
 
 
@@ -330,7 +330,7 @@ Include a screenshot of the sad smiley or the modified `main.py`:
   2. **Refactor subclasses to use the `complexion` method:** Modify any subclass that directly accesses the color variable to instead utilize the new `complexion` method. This ensures that color handling is centralized and can be easily modified in the future.
 
   3. **Determine the applicable Object-Oriented principle:** Consider whether Abstraction, Polymorphism, Inheritance, or Encapsulation best applies to the modifications made in this step.
-> Abstraction
+> Polymorphism
 
   4. **Verify the implementation:** Ensure that the modifications function as expected. The smileys should still display in yellow, confirming that the new method correctly replaces the direct color references.
 > ![Working Complexion](screenshots/working_complexion.png)
